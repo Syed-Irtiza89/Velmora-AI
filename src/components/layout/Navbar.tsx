@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Menu, X } from 'lucide-react';
-import { useTheme } from '../../context/ThemeContext';
+import { Menu, X } from 'lucide-react';
 import logo from '../../assets/logo.png';
 
 const navLinks = [
@@ -13,7 +12,6 @@ const navLinks = [
 ];
 
 const Navbar: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -35,11 +33,7 @@ const Navbar: React.FC = () => {
             : 'py-5'
         }`}
         style={{
-          background: scrolled
-            ? theme === 'dark'
-              ? 'rgba(10, 10, 15, 0.85)'
-              : 'rgba(248, 250, 255, 0.85)'
-            : 'transparent',
+          background: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
           borderColor: scrolled ? 'var(--border-color)' : 'transparent',
         }}
       >
@@ -51,7 +45,7 @@ const Navbar: React.FC = () => {
               <img src={logo} alt="Velmora AI Logo" className="w-9 h-9 relative z-10 object-contain" />
             </div>
             <span className="font-bold text-xl tracking-tight hidden sm:block" style={{ color: 'var(--text-primary)' }}>
-              Velmora <span className="gradient-text-blue">AI</span>
+              Velmora <span className="text-blue-600">AI</span>
             </span>
           </a>
 
@@ -61,7 +55,7 @@ const Navbar: React.FC = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm font-medium transition-colors duration-200 hover:text-blue-400"
+                className="text-sm font-medium transition-colors duration-200 hover:text-blue-600"
                 style={{ color: 'var(--text-secondary)' }}
               >
                 {link.label}
@@ -71,24 +65,16 @@ const Navbar: React.FC = () => {
 
           {/* Desktop actions */}
           <div className="hidden md:flex items-center gap-3">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg transition-colors duration-200 hover:bg-white/10"
-              style={{ color: 'var(--text-secondary)' }}
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
             <a
               href="#pricing"
-              className="px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200"
+              className="px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 hover:bg-slate-100"
               style={{ color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
             >
               Log in
             </a>
             <a
               href="#contact"
-              className="px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 text-white glow-button hover:scale-105 transition-transform duration-200"
+              className="px-4 py-2 text-sm font-semibold rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 shadow-md"
             >
               Get Started
             </a>
@@ -96,9 +82,6 @@ const Navbar: React.FC = () => {
 
           {/* Mobile hamburger */}
           <div className="flex md:hidden items-center gap-2">
-            <button onClick={toggleTheme} className="p-2" style={{ color: 'var(--text-secondary)' }}>
-              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
             <button onClick={() => setMobileOpen(!mobileOpen)} style={{ color: 'var(--text-primary)' }}>
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -113,7 +96,7 @@ const Navbar: React.FC = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="fixed top-0 left-0 right-0 z-40 pt-20 pb-6 px-4 backdrop-blur-xl border-b"
+            className="fixed top-0 left-0 right-0 z-40 pt-20 pb-6 px-4 backdrop-blur-xl border-b overflow-hidden"
             style={{
               background: 'var(--bg-secondary)',
               borderColor: 'var(--border-color)',
@@ -125,17 +108,17 @@ const Navbar: React.FC = () => {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-base font-medium py-2 transition-colors hover:text-blue-400"
+                  className="text-base font-medium py-2 transition-colors hover:text-blue-600"
                   style={{ color: 'var(--text-secondary)' }}
                 >
                   {link.label}
                 </a>
               ))}
               <div className="flex flex-col gap-3 mt-2">
-                <a href="#pricing" className="w-full text-center px-4 py-2.5 rounded-lg border text-sm font-medium" style={{ color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}>
+                <a href="#pricing" className="w-full text-center px-4 py-2.5 rounded-lg border text-sm font-medium hover:bg-slate-50 transition-colors" style={{ color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}>
                   Log in
                 </a>
-                <a href="#contact" className="w-full text-center px-4 py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-sm font-semibold">
+                <a href="#contact" className="w-full text-center px-4 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors text-sm font-semibold">
                   Get Started
                 </a>
               </div>

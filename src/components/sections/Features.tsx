@@ -73,8 +73,7 @@ const Features: React.FC = () => {
           className="text-center mb-16"
         >
           <div
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-4 border"
-            style={{ background: 'rgba(59,130,246,0.1)', borderColor: 'rgba(59,130,246,0.3)', color: '#60a5fa' }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-4 border bg-blue-50 border-blue-200 text-blue-600"
           >
             ⚡ Everything You Need
           </div>

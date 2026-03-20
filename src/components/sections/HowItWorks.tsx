@@ -43,8 +43,7 @@ const HowItWorks: React.FC = () => {
           className="text-center mb-16"
         >
           <div
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-4 border"
-            style={{ background: 'rgba(139,92,246,0.1)', borderColor: 'rgba(139,92,246,0.3)', color: '#a78bfa' }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-4 border bg-purple-50 border-purple-200 text-purple-600"
           >
             🚀 Simple 3-Step Setup
           </div>
@@ -73,9 +72,9 @@ const HowItWorks: React.FC = () => {
                   transition={{ duration: 0.8, delay: i * 0.2, ease: [0.22, 1, 0.36, 1] as any }}
                   className="glass-card p-10 relative group hover:-translate-y-3 transition-all duration-500 overflow-hidden"
                 >
-                  {/* Step number - Neon Outline */}
+                  {/* Step number - Large Background Number */}
                   <div
-                    className="text-8xl font-black absolute -top-2 -right-2 select-none pointer-events-none neon-outline opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-700"
+                    className="text-8xl font-black absolute -top-4 -right-2 select-none pointer-events-none text-slate-100 opacity-60 group-hover:scale-110 group-hover:text-slate-200 transition-all duration-700 z-0"
                     style={{ lineHeight: 1 }}
                   >
                     {step.number}
@@ -104,7 +103,7 @@ const HowItWorks: React.FC = () => {
                   <ul className="space-y-3">
                     {step.checks.map(check => (
                       <li key={check} className="flex items-center gap-3 text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
-                        <div className="w-5 h-5 rounded-full flex items-center justify-center bg-white/5 border border-white/5">
+                        <div className="w-5 h-5 rounded-full flex items-center justify-center bg-slate-50 border border-slate-200">
                           <CheckCircle size={14} style={{ color: step.color, flexShrink: 0 }} />
                         </div>
                         {check}

@@ -1,5 +1,4 @@
 import React from 'react';
-import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
@@ -15,24 +14,22 @@ import LiveChatWidget from './components/widgets/LiveChatWidget';
 
 function App() {
   return (
-    <ThemeProvider>
-      <div className="antialiased noise">
-        <Navbar />
-        <main>
-          <Hero />
-          <Features />
-          <HowItWorks />
-          <UseCases />
-          <Demo />
-          <Testimonials />
-          <Pricing />
-          <CTA />
-        </main>
-        <Footer />
-        <WhatsAppButton />
-        <LiveChatWidget />
-      </div>
-    </ThemeProvider>
+    <div className="antialiased noise">
+      <Navbar />
+      <main>
+        <Hero />
+        <Features />
+        <HowItWorks />
+        <UseCases />
+        <Demo />
+        <Testimonials />
+        <Pricing />
+        <CTA />
+      </main>
+      <Footer />
+      <WhatsAppButton />
+      <LiveChatWidget />
+    </div>
   );
 }
 

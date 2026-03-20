@@ -79,14 +79,13 @@ const UseCases: React.FC = () => {
           className="text-center mb-14"
         >
           <div
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-4 border"
-            style={{ background: 'rgba(6,182,212,0.1)', borderColor: 'rgba(6,182,212,0.3)', color: '#22d3ee' }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-4 border bg-cyan-50 border-cyan-200 text-cyan-600"
           >
             🏢 Built For Your Industry
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
             Works For Every{' '}
-            <span className="gradient-text">Business Type</span>
+            <span className="gradient-text-blue">Business Type</span>
           </h2>
           <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
             Velmora AI adapts to your industry, your brand voice, and your customers.
@@ -94,7 +93,7 @@ const UseCases: React.FC = () => {
         </motion.div>
 
         {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-16 p-2 glass-card bg-white/5 border-white/5 w-fit mx-auto rounded-[20px] relative">
+        <div className="flex flex-wrap justify-center gap-2 mb-16 p-2 bg-white border border-slate-200 w-fit mx-auto rounded-[20px] shadow-sm relative z-20">
           {useCases.map(uc => {
             const TabIcon = uc.icon;
             const isActive = active === uc.id;
@@ -108,15 +107,11 @@ const UseCases: React.FC = () => {
                 {isActive && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute inset-0 rounded-lg shadow-xl"
-                    style={{ 
-                      background: `linear-gradient(135deg, ${uc.color}, ${uc.color}dd)`,
-                      boxShadow: `0 4px 15px ${uc.color}40`
-                    }}
+                    className="absolute inset-0 rounded-lg shadow-md bg-blue-600"
                     transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                   />
                 )}
-                <TabIcon size={16} className={`relative z-10 ${isActive ? 'text-white' : 'group-hover:text-white transition-colors'}`} />
+                <TabIcon size={16} className={`relative z-10 ${isActive ? 'text-white' : 'group-hover:text-blue-600 transition-colors'}`} />
                 <span className="relative z-10">{uc.title}</span>
               </button>
             );
@@ -132,20 +127,19 @@ const UseCases: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] as any }}
-              className="glass-card p-10 lg:p-14 gradient-border grid lg:grid-cols-2 gap-16 items-center absolute inset-0 h-full backdrop-blur-2xl"
-              style={{ background: 'rgba(15, 23, 42, 0.4)' }}
+              className="bg-white rounded-3xl p-10 lg:p-14 border border-slate-200 shadow-xl grid lg:grid-cols-2 gap-16 items-center absolute inset-0 h-full overflow-hidden"
             >
               {/* Left Column */}
-              <div>
+              <div className="relative z-10">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.2 }}
                   className="w-16 h-16 rounded-2xl flex items-center justify-center mb-8"
                   style={{ 
-                    background: `linear-gradient(135deg, ${current.color}20, ${current.color}10)`, 
+                    background: `linear-gradient(135deg, ${current.color}15, ${current.color}05)`, 
                     border: `1px solid ${current.color}30`,
-                    boxShadow: `0 10px 30px ${current.color}10`
+                    boxShadow: `0 4px 15px ${current.color}10`
                   }}
                 >
                   <Icon size={32} style={{ color: current.color }} />
@@ -166,7 +160,7 @@ const UseCases: React.FC = () => {
                   className="text-3xl sm:text-4xl font-bold mb-6 tracking-tight" 
                   style={{ color: 'var(--text-primary)' }}
                 >
-                  {current.title} AI <span className="text-white/40">Automation</span>
+                  {current.title} AI <span className="text-slate-400">Automation</span>
                 </motion.h3>
                 <motion.p 
                   initial={{ opacity: 0 }}
@@ -192,15 +186,15 @@ const UseCases: React.FC = () => {
                 </motion.ul>
               </div>
 
-              {/* Right Column — Improved Stats */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-6">
+              {/* Right Column — Improved Stats for Light Theme */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-6 relative z-10">
                 {current.stats.map((stat, idx) => (
                   <motion.div
                     key={stat.label}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 + (idx * 0.1), duration: 0.6, ease: [0.22, 1, 0.36, 1] as any }}
-                    className="glass-card p-6 flex flex-row lg:flex-row items-center gap-6 border-white/5 hover:border-white/10 transition-colors"
+                    className="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-row lg:flex-row items-center gap-6 hover:shadow-md transition-shadow"
                   >
                     <div 
                       className="text-4xl font-black tracking-tighter"
@@ -208,8 +202,8 @@ const UseCases: React.FC = () => {
                     >
                       {stat.value}
                     </div>
-                    <div className="h-10 w-px bg-white/10 hidden lg:block" />
-                    <div className="text-sm font-bold uppercase tracking-wider text-slate-400">{stat.label}</div>
+                    <div className="h-10 w-px bg-slate-200 hidden lg:block" />
+                    <div className="text-sm font-bold uppercase tracking-wider text-slate-500">{stat.label}</div>
                   </motion.div>
                 ))}
               </div>
