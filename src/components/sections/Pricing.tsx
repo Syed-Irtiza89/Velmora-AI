@@ -6,222 +6,192 @@ const plans = [
   {
     name: 'Basic',
     icon: Zap,
-    price: 0,
-    period: 'Free forever',
-    desc: 'Perfect for getting started',
-    color: '#3b82f6',
+    price: 49,
+    period: '/ mo',
+    desc: 'Simple, transparent pricing for AI automation.',
+    color: '#3b82f6', // blue-500
+    buttonColor: '#14b8a6', // teal-500
     popular: false,
     features: [
-      '1 AI chatbot',
-      '500 conversations/month',
-      'Basic lead capture',
-      'Email support',
-      'Standard analytics',
-      'Website widget',
+      '1 AI Assistant',
+      'Basic WhatsApp Integration',
+      'Email Support',
+      'Limited API Access',
+      '1,000 Monthly Interactions',
     ],
-    disabled: ['WhatsApp integration', 'Smart follow-ups', 'Custom branding'],
-    cta: 'Start Free',
+    cta: 'Get Started',
   },
   {
     name: 'Pro',
     icon: Shield,
-    price: 49,
-    period: '/month',
-    desc: 'Most popular for growing businesses',
-    color: '#06b6d4',
+    price: 99,
+    period: '/ mo',
+    desc: 'Advanced features for growing businesses.',
+    color: '#14b8a6', // teal-500 (card header)
+    accentColor: '#2563eb', // blue-600 (button)
     popular: true,
     features: [
-      '3 AI chatbots',
-      'Unlimited conversations',
-      'Advanced lead qualification',
-      'WhatsApp integration',
-      'Smart follow-ups',
-      'Priority support',
-      'Full analytics dashboard',
-      'Custom branding',
+      '3 AI Assistants',
+      'Advanced WhatsApp Integration',
+      '24/7 Priority Support',
+      'Full API Access',
+      'Advanced AI Training',
+      '10,000 Monthly Interactions',
     ],
-    disabled: [],
-    cta: 'Start Pro',
+    cta: 'Upgrade to Pro',
   },
   {
-    name: 'Premium',
+    name: 'Enterprise',
     icon: Crown,
-    price: 99,
-    period: '/month',
-    desc: 'For agencies and enterprises',
-    color: '#8b5cf6',
+    price: 'Custom',
+    period: '',
+    desc: 'Tailored solutions for large scale.',
+    color: '#1e293b', // slate-800
     popular: false,
     features: [
-      'Unlimited AI chatbots',
-      'Unlimited conversations',
-      'Multi-location support',
-      'Advanced integrations (CRM)',
-      'White-label solution',
-      'Dedicated account manager',
-      'Custom AI training',
-      'SLA guarantee',
-      'API access',
+      'Unlimited AI Assistants',
+      'Custom Integration Solutions',
+      'Dedicated Account Manager',
+      'SLA & Security Compliance',
+      'Custom AI Models',
+      'Unlimited Interactions',
     ],
-    disabled: [],
-    cta: 'Go Premium',
+    cta: 'Contact Sales',
   },
 ];
 
+const faqs = [
+  { question: 'What payment methods do you accept?' },
+  { question: 'Is there a free trial available?' },
+  { question: 'Can I upgrade or downgrade my plan?' },
+  { question: 'How secure is my data?' },
+];
+
 const Pricing: React.FC = () => {
-  const [annual, setAnnual] = useState(false);
+  const [annual, setAnnual] = useState(true);
 
   return (
-    <section id="pricing" className="section-padding relative overflow-hidden">
-      <div className="ambient-blob w-96 h-96 bg-cyan-500/10 top-0 left-0" />
-
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-20"
-        >
-          <div
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[11px] font-bold tracking-widest uppercase border bg-indigo-500/10 border-indigo-500/20 text-indigo-400 mb-6"
-          >
-            💎 Investment & Growth
-          </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black mb-6 tracking-tight" style={{ color: 'var(--text-primary)' }}>
-            Plans That Grow <span className="gradient-text">With You</span>
-          </h2>
-          <p className="text-lg sm:text-xl font-medium max-w-2xl mx-auto leading-relaxed mb-12" style={{ color: 'var(--text-secondary)' }}>
-            Choose the perfect plan for your business. No hidden fees. Cancel anytime. 14-day free trial on all paid plans.
-          </p>
-
-          {/* Toggle */}
-          <div className="inline-flex items-center gap-1 p-2 rounded-2xl glass-card bg-white/5 border-white/5 relative">
-            <button
-              onClick={() => setAnnual(false)}
-              className="relative px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 z-10"
-              style={{ color: !annual ? '#fff' : 'var(--text-secondary)' }}
-            >
-              {!annual && (
-                <motion.div
-                  layoutId="billingToggle"
-                  className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-500 rounded-lg shadow-lg"
-                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                />
-              )}
-              <span className="relative z-10">Monthly</span>
-            </button>
-            <button
-              onClick={() => setAnnual(true)}
-              className="relative px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 z-10 flex items-center gap-3"
-              style={{ color: annual ? '#fff' : 'var(--text-secondary)' }}
-            >
-              {annual && (
-                <motion.div
-                  layoutId="billingToggle"
-                  className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-500 rounded-lg shadow-lg"
-                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                />
-              )}
-              <span className="relative z-10">Annual</span>
-              <span className="relative z-10 text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/20">-20%</span>
-            </button>
-          </div>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch pt-10">
-          {plans.map((plan, i) => {
-            const Icon = plan.icon;
-            const price = annual && plan.price > 0 ? Math.floor(plan.price * 0.8) : plan.price;
-
-            return (
-              <motion.div
-                key={plan.name}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: i * 0.2, ease: [0.22, 1, 0.36, 1] as any }}
-                className={`glass-card p-10 lg:p-14 relative group flex flex-col h-full bg-slate-900/40 backdrop-blur-3xl ${plan.popular ? 'border-indigo-500/30 scale-105 z-10 shadow-2xl shadow-indigo-500/10' : 'border-white/5'}`}
+    <div className="bg-[#F8FAFC] text-slate-800 flex flex-col min-h-screen">
+      <main className="flex-grow flex flex-col">
+        {/* Hero Section */}
+        <section id="pricing" className="bg-[#0B1B3D] bg-gradient-to-b from-[#0B1B3D] to-[#1E3A8A] pt-24 pb-48 text-center px-4 relative">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+              Simple, transparent pricing <br className="hidden md:block" /> for AI automation.
+            </h1>
+            {/* Billing Toggle */}
+            <div className="flex items-center justify-center gap-4 mt-8">
+              <span className="text-slate-300 font-medium text-sm">Monthly Billing</span>
+              <button
+                onClick={() => setAnnual(!annual)}
+                className={`${annual ? 'bg-blue-500' : 'bg-slate-600'} relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#0B1B3D]`}
+                role="switch"
+                aria-checked={annual}
               >
-                {/* Popular badge */}
-                {plan.popular && (
-                  <div
-                    className="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full text-[11px] font-black uppercase tracking-widest text-white shadow-xl z-20 whitespace-nowrap"
-                    style={{ background: `linear-gradient(90deg, ${plan.color}, #8482f6)` }}
-                  >
-                    Most Popular
-                  </div>
-                )}
+                <span className="sr-only">Toggle billing</span>
+                <span className={`${annual ? 'translate-x-5' : 'translate-x-0'} pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out`}></span>
+              </button>
+              <div className="flex items-center gap-2">
+                <span className="text-white font-medium text-sm">Annual Billing</span>
+                <span className="inline-flex items-center rounded-full bg-blue-100/10 px-2 py-0.5 text-xs font-medium text-blue-200 ring-1 ring-inset ring-blue-500/20">Save 20%</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                {/* Icon + name */}
-                <div className="flex items-center gap-5 mb-10">
-                  <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0"
-                    style={{ background: `${plan.color}15`, border: `1px solid ${plan.color}30`, boxShadow: `0 8px 30px ${plan.color}10` }}
+        {/* Pricing Cards Section */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 relative z-10 w-full mb-24">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+            {plans.map((plan) => {
+              const price = typeof plan.price === 'number' && annual ? Math.floor(plan.price * 0.8) : plan.price;
+              
+              return (
+                <div
+                  key={plan.name}
+                  className={`bg-white rounded-2xl p-8 flex flex-col h-full transform transition-all duration-300 hover:-translate-y-2 ${
+                    plan.popular 
+                      ? 'shadow-2xl ring-2 ring-blue-500 md:-translate-y-4 z-20' 
+                      : 'shadow-xl ring-1 ring-slate-200'
+                  }`}
+                >
+                  {plan.popular && (
+                    <div className="absolute top-0 inset-x-0 transform -translate-y-1/2 flex justify-center">
+                      <span className="bg-blue-100 text-blue-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Most Popular</span>
+                    </div>
+                  )}
+                  
+                  <div 
+                    className="rounded-lg py-3 text-center mb-6"
+                    style={{ backgroundColor: plan.color }}
                   >
-                    <Icon size={28} style={{ color: plan.color }} />
+                    <h3 className="text-lg font-semibold text-white">{plan.name}</h3>
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-black tracking-tight" style={{ color: 'var(--text-primary)' }}>{plan.name}</h3>
-                    <p className="text-[13px] font-medium leading-tight" style={{ color: 'var(--text-secondary)' }}>{plan.desc}</p>
-                  </div>
-                </div>
 
-                {/* Price */}
-                <div className="mb-10">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-6xl font-black tracking-tighter" style={{ color: 'var(--text-primary)' }}>
-                      {plan.price === 0 ? 'Free' : `$${price}`}
-                    </span>
-                    {plan.price > 0 && (
-                      <span className="text-lg font-bold opacity-40 uppercase tracking-widest" style={{ color: 'var(--text-secondary)' }}>/mo</span>
+                  <div className="text-center mb-8 flex flex-col items-center justify-center min-h-[52px]">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl font-bold text-slate-900">
+                        {typeof price === 'number' ? `$${price}` : price}
+                      </span>
+                      {typeof price === 'number' && (
+                        <span className="text-slate-500 font-medium">{plan.period}</span>
+                      )}
+                    </div>
+                    {annual && typeof plan.price === 'number' && (
+                      <p className="text-xs text-emerald-500 mt-1 font-bold">Billed annually</p>
                     )}
                   </div>
-                  {annual && plan.price > 0 && (
-                    <motion.p 
-                      initial={{ opacity: 0, y: 5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="text-sm font-bold text-emerald-400 mt-3 flex items-center gap-1.5"
-                    >
-                      <Zap size={14} className="fill-emerald-400" />
-                      Save ${(plan.price - price) * 12}/yr
-                    </motion.p>
-                  )}
+
+                  <ul className="space-y-4 mb-8 flex-grow">
+                    {plan.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-3">
+                        <svg className="h-5 w-5 text-teal-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+                        </svg>
+                        <span className="text-slate-600 text-sm">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <button 
+                    className={`w-full font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg ${
+                      plan.popular ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-teal-500 hover:bg-teal-600 text-white'
+                    }`}
+                    style={plan.name === 'Enterprise' ? { backgroundColor: plan.color } : {}}
+                  >
+                    {plan.cta}
+                  </button>
                 </div>
+              );
+            })}
+          </div>
+        </section>
 
-                {/* CTA */}
-                <a
-                  href="#contact"
-                  className={`block w-full text-center py-5 rounded-2xl font-bold tracking-tight mb-10 transition-all duration-300 hover:scale-[1.02] shadow-xl ${plan.popular ? 'bg-gradient-to-r from-blue-600 to-indigo-500 text-white' : 'bg-white/5 text-white border border-white/10 hover:bg-white/10'}`}
-                >
-                  {plan.cta}
-                </a>
+        {/* FAQ Section */}
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-10">Frequently Asked Questions</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {faqs.map((faq, i) => (
+              <div key={i} className="bg-white border border-slate-200 rounded-lg p-5 flex justify-between items-center cursor-pointer hover:shadow-sm transition-shadow group">
+                <span className="font-medium text-slate-800 group-hover:text-blue-600 transition-colors">{faq.question}</span>
+                <svg className="w-5 h-5 text-slate-400 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 9l-7 7-7-7" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+                </svg>
+              </div>
+            ))}
+          </div>
+        </section>
 
-                {/* Features */}
-                <p className="text-xs font-black uppercase tracking-widest text-slate-500 mb-6">What's included:</p>
-                <ul className="space-y-4 flex-1">
-                  {plan.features.map(f => (
-                    <li key={f} className="flex items-center gap-4 text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
-                      <div className="w-5 h-5 rounded-full flex items-center justify-center bg-white/5 border border-white/5 shrink-0">
-                        <Check size={14} style={{ color: plan.color }} />
-                      </div>
-                      {f}
-                    </li>
-                  ))}
-                  {plan.disabled.map(f => (
-                    <li key={f} className="flex items-center gap-4 text-sm font-bold opacity-20">
-                      <div className="w-5 h-5 rounded-full flex items-center justify-center border border-white/10 shrink-0">
-                        <div className="w-2 h-0.5 bg-slate-500" />
-                      </div>
-                      <span style={{ color: 'var(--text-secondary)' }}>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
+        {/* CTA Banner */}
+        <section className="bg-[#0B1B3D] text-white py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-center gap-8 text-center md:text-left">
+            <h3 className="text-2xl font-bold">Need a custom enterprise solution? Let's talk.</h3>
+            <button className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3.5 px-8 rounded-xl transition-all duration-200 hover:scale-105 whitespace-nowrap shadow-xl">
+              Contact Us
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 };
 
